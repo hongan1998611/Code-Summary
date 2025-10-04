@@ -42,11 +42,11 @@ function redirectToLogin() {
 }
 
 // Khởi tạo viewer
-function initializeViewer() {
+async function initializeViewer() {
   console.log("Initializing viewer...");
   setupEventListeners();
   console.log("Event listeners set up, loading mindmap data...");
-  loadMindmapData();
+  await loadMindmapData();
 }
 
 // Setup các event listeners
@@ -102,10 +102,12 @@ function setupEventListeners() {
     .addEventListener("click", collapseAllTopics);
 
   // Error modal buttons
-  document.getElementById("retryBtn").addEventListener("click", function () {
-    hideErrorModal();
-    loadMindmapData();
-  });
+  document
+    .getElementById("retryBtn")
+    .addEventListener("click", async function () {
+      hideErrorModal();
+      await loadMindmapData();
+    });
 
   document
     .getElementById("backToLoginBtn")
@@ -160,22 +162,31 @@ function setupEventListeners() {
   });
 }
 
-// Load dữ liệu mindmap từ embedded JSON
-function loadMindmapData() {
-  console.log("Starting loadMindmapData...");
+// Load dữ liệu mindmap từ GitHub JSON file
+async function loadMindmapData() {
+  console.log("Starting loadMindmapData from GitHub...");
 
   try {
-    // Đọc JSON data từ script tag
-    const dataScript = document.getElementById("mindmap-data");
-    console.log("Found data script element:", !!dataScript);
+    // GitHub raw file URL
+    const githubUrl =
+      "https://raw.githubusercontent.com/hongan1998611/Code-Summary/main/mindmap_data.json";
 
-    if (!dataScript || !dataScript.textContent.trim()) {
-      throw new Error("Không tìm thấy dữ liệu mindmap trong trang");
+    console.log("Fetching data from:", githubUrl);
+
+    // Show loading state
+    const mindmapContainer = document.getElementById("mindmapContainer");
+    mindmapContainer.innerHTML =
+      '<div class="text-center py-8"><i class="fas fa-spinner fa-spin text-2xl text-blue-500"></i><p class="mt-2 text-gray-600">Đang tải dữ liệu từ GitHub...</p></div>';
+
+    // Fetch data from GitHub
+    const response = await fetch(githubUrl);
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
     }
 
-    console.log("Data script content length:", dataScript.textContent.length);
-    mindmapData = JSON.parse(dataScript.textContent);
-    console.log("Mindmap data loaded successfully:", mindmapData);
+    mindmapData = await response.json();
+    console.log("Mindmap data loaded successfully from GitHub:", mindmapData);
 
     if (mindmapData && mindmapData.sheets && mindmapData.sheets.length > 0) {
       currentSheet = mindmapData.sheets[0];
@@ -192,7 +203,7 @@ function loadMindmapData() {
     }
   } catch (error) {
     console.error("Error loading mindmap data:", error);
-    showErrorModal("Không thể tải dữ liệu mindmap: " + error.message);
+    showErrorModal("Không thể tải dữ liệu mindmap từ GitHub: " + error.message);
   }
 }
 
