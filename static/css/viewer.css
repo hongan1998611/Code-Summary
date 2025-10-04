@@ -1,0 +1,450 @@
+/* Viewer.css - Styles cho XMind Viewer - Light Theme */
+
+/* Animation keyframes */
+@keyframes highlight {
+  0%,
+  100% {
+    background-color: transparent;
+  }
+  50% {
+    background-color: rgba(14, 165, 233, 0.2);
+    box-shadow: 0 0 0 2px rgba(14, 165, 233, 0.3);
+  }
+}
+
+@keyframes slideDown {
+  0% {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.02);
+  }
+}
+
+/* Main styles */
+.highlight {
+  animation: highlight 2s ease-in-out;
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.4s ease-out;
+}
+
+.search-highlight {
+  background-color: rgba(255, 255, 0, 0.25) !important;
+  border: 1px solid rgba(255, 193, 7, 0.6) !important;
+  box-shadow: 0 0 0 2px rgba(255, 193, 7, 0.2);
+}
+
+.search-dim {
+  /* Removed opacity dimming effect - no dimming at all */
+  opacity: 1;
+  transition: opacity 0.3s ease;
+}
+
+.search-focus {
+  animation: searchPulse 2s ease-in-out;
+  box-shadow: 0 0 20px rgba(59, 130, 246, 0.6);
+  border-color: #3b82f6 !important;
+}
+
+@keyframes searchPulse {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 0 20px rgba(59, 130, 246, 0.6);
+  }
+  50% {
+    transform: scale(1.02);
+    box-shadow: 0 0 30px rgba(59, 130, 246, 0.8);
+  }
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 20px rgba(59, 130, 246, 0.6);
+  }
+}
+
+/* Topic styling - Beautiful gradient colors by level */
+.topic-header {
+  position: relative;
+  border-radius: 0;
+  padding: 0.08rem 0.5rem;
+  margin-bottom: 0.05rem;
+  box-shadow: none;
+  border: 1px solid #e5e7eb;
+}
+
+/* Root topic - Stunning gradient */
+.root-topic .topic-header {
+  font-size: 1rem;
+  font-weight: 500;
+  padding: 0.2rem 1rem;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+  margin-bottom: 0.125rem;
+}
+
+.root-topic .topic-header:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.5);
+}
+
+/* Level 1 - Rich Blue */
+.topic-item[data-level="1"] .topic-header {
+  background: linear-gradient(135deg, #1e40af 0%, #1e3a8a 100%);
+  color: white;
+  border-left: 3px solid #1e3a8a;
+}
+
+/* Level 2 - Medium Blue */
+.topic-item[data-level="2"] .topic-header {
+  background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+  color: white;
+  border-left: 3px solid #1d4ed8;
+}
+
+/* Level 3 - Light Blue */
+.topic-item[data-level="3"] .topic-header {
+  background: linear-gradient(135deg, #60a5fa 0%, #3b82f6 100%);
+  color: white;
+  border-left: 3px solid #2563eb;
+}
+
+/* Level 4 - Lighter Blue */
+.topic-item[data-level="4"] .topic-header {
+  background: linear-gradient(135deg, #93c5fd 0%, #60a5fa 100%);
+  color: white;
+  border-left: 3px solid #3b82f6;
+}
+
+/* Level 5+ - Very Light Blue */
+.topic-item[data-level="5"] .topic-header,
+.topic-item[data-level="6"] .topic-header,
+.topic-item[data-level="7"] .topic-header {
+  background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
+  color: #1e40af;
+  border-left: 3px solid #60a5fa;
+}
+
+.children-container {
+  position: relative;
+  margin-left: 1.25rem;
+  border-left: 2px solid #e5e7eb;
+  padding-left: 1rem;
+}
+
+/* Icon animations - Beautiful colors matching gradients */
+.note-icon,
+.link-icon {
+  transition: all 0.2s ease;
+  border-radius: 0.25rem;
+  padding: 0.25rem;
+  background: rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: white;
+  font-size: 0.75rem;
+  backdrop-filter: blur(10px);
+}
+
+.note-icon:hover,
+.link-icon:hover {
+  transform: scale(1.1);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.expand-btn {
+  transition: all 0.2s ease;
+  background: rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 0.25rem;
+  padding: 0.25rem;
+  min-width: 1.5rem;
+  min-height: 1.5rem;
+  color: white;
+  backdrop-filter: blur(10px);
+}
+
+.expand-btn:hover {
+  transform: scale(1.1);
+  background: rgba(255, 255, 255, 0.3);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Topic text styling - High contrast for all levels */
+.topic-title {
+  font-weight: 400;
+  line-height: 1;
+}
+
+.root-topic .topic-title {
+  font-size: 0.875rem;
+}
+
+/* Override text colors for readability */
+.topic-item[data-level="4"] .topic-title {
+  color: #1f2937;
+  font-weight: 700;
+}
+
+/* Loading screen */
+#loadingScreen {
+  backdrop-filter: blur(8px);
+}
+
+/* Error modal and Notes modal */
+#errorModal,
+#notesModal {
+  backdrop-filter: blur(8px);
+}
+
+/* Notes modal specific styles */
+#notesModal {
+  z-index: 1000;
+}
+
+#notesModal .bg-white {
+  transition: all 0.2s ease;
+  transform: scale(1);
+  opacity: 1;
+}
+
+#notesModal.hidden .bg-white {
+  transform: scale(0.95);
+  opacity: 0;
+}
+
+/* Search box enhancements */
+#searchBox {
+  transition: all 0.2s ease;
+}
+
+#searchBox:focus {
+  box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.1);
+  transform: scale(1.01);
+}
+
+/* Scrollbar styling - Light theme */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(241, 245, 249, 0.8);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(14, 165, 233, 0.4);
+  border-radius: 3px;
+  transition: background 0.3s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(14, 165, 233, 0.6);
+}
+
+::-webkit-scrollbar-corner {
+  background: rgba(241, 245, 249, 0.8);
+}
+
+/* Firefox scrollbar */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(14, 165, 233, 0.4) rgba(241, 245, 249, 0.8);
+}
+
+/* Responsive design - Updated for better mobile experience */
+@media (max-width: 768px) {
+  .topic-header {
+    padding: 0.25rem 0.75rem;
+    flex-wrap: wrap;
+  }
+
+  .root-topic .topic-header {
+    padding: 0.2rem 1.25rem;
+    font-size: 1.125rem;
+  }
+
+  .children-container {
+    margin-left: 0.75rem;
+    padding-left: 0.75rem;
+  }
+
+  /* Larger touch targets for mobile */
+  .expand-btn {
+    min-width: 2.5rem;
+    min-height: 2.5rem;
+  }
+
+  .note-icon,
+  .link-icon {
+    min-width: 2.5rem;
+    min-height: 2.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 640px) {
+  .topic-header {
+    flex-wrap: wrap;
+    gap: 0.375rem;
+  }
+
+  .topic-title {
+    min-width: 0;
+    word-break: break-word;
+  }
+
+  #searchBox {
+    width: 180px;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .topic-header {
+    border-width: 2px;
+    border-color: #334155;
+  }
+
+  .search-highlight {
+    background-color: yellow !important;
+    color: black !important;
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Print styles */
+@media print {
+  #loadingScreen,
+  #errorModal,
+  #notesModal,
+  header {
+    display: none !important;
+  }
+
+  .container {
+    margin: 0 !important;
+    padding: 1rem !important;
+    max-width: none !important;
+  }
+
+  .topic-header {
+    break-inside: avoid;
+    page-break-inside: avoid;
+    box-shadow: none !important;
+    border: 1px solid #64748b !important;
+    background: white !important;
+    color: black !important;
+  }
+
+  .children-container {
+    break-inside: avoid;
+  }
+}
+
+/* Focus styles for accessibility */
+button:focus,
+input:focus {
+  outline: 2px solid rgba(14, 165, 233, 0.8);
+  outline-offset: 2px;
+}
+
+/* Topic item focus styles */
+.topic-item:focus-within {
+  outline: 2px solid rgba(14, 165, 233, 0.6);
+  outline-offset: 2px;
+  border-radius: 8px;
+}
+
+/* Selection styles */
+::selection {
+  background-color: rgba(14, 165, 233, 0.2);
+  color: #1e293b;
+}
+
+/* Loading animation enhancements */
+.animate-spin {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Custom button hover effects */
+button {
+  transition: all 0.2s ease;
+}
+
+button:hover {
+  filter: brightness(1.05);
+}
+
+button:active {
+  transform: scale(0.98);
+}
+
+/* Tooltip improvements */
+#tooltip {
+  z-index: 1000;
+  animation: fadeIn 0.2s ease-out;
+  max-width: 250px;
+  word-wrap: break-word;
+}
+
+/* Mobile-specific improvements */
+@media (hover: none) and (pointer: coarse) {
+  .topic-header:hover {
+    transform: none;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .root-topic .topic-header:hover {
+    transform: none;
+    box-shadow: 0 4px 20px rgba(14, 165, 233, 0.3);
+  }
+}
